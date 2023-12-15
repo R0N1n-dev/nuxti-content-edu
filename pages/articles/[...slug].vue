@@ -1,11 +1,14 @@
 <template>
-  <ContentDoc
-    :path="
-      $route.params.slug ? `/articles/${$route.params.slug[0]}` : '/articles'
-    "
-  >
-    <template #not-found>
-      <h2>Blog slug ({{ $route.params.slug }}) not found</h2>
-    </template>
-  </ContentDoc>
+  <div>
+    <button @click="router.go(-1)">Back</button>
+    <ContentRenderer :value="blogPost" />
+  </div>
 </template>
+
+<script setup>
+const router = useRouter();
+const route = useRoute();
+const { data: blogPost } = await useAsyncData("blogPost", () =>
+  queryContent("/articles").where({ _path: route.path }).findOne()
+);
+</script>
