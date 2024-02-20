@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>Blog</h1>
+    <h1>Nutrients</h1>
     <ul>
-      <li v-for="{ _path: slug, title } in blogPosts" :key="slug">
+      <li v-for="{ _path: slug, title } in nutrients" :key="slug">
         <NuxtLink :to="slug">{{ title }}</NuxtLink>
       </li>
     </ul>
@@ -14,7 +14,7 @@
   .sort({ date: -1 }) // show latest articles first
   .where({ _partial: false }) // exclude the Partial files
   .find();*/
-const { data: blogPosts } = await useAsyncData("blogPosts", () =>
-  queryContent("/articles").find()
+const { data: nutrients } = await useAsyncData("nutrients", () =>
+  queryContent("/nutrients").find()
 );
 </script>
